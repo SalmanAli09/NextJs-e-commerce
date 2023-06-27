@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -12,8 +13,7 @@ import {
     MDBIcon,
     MDBInput,
     MDBCheckbox
-}
-    from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
 
 function App() {
     const router = useRouter();
@@ -22,6 +22,8 @@ function App() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
+    const [missingDetails, setMissingDetails] = useState(false);
 
     const handleJustifyClick = (value) => {
         if (value === justifyActive) {
@@ -41,27 +43,35 @@ function App() {
         if (email === savedEmail && password === savedPassword) {
             router.push('/dashboard');
         } else {
-            <h1>Invalid Credentails</h1>
-            router.push('/');
-
+            alert('Invalid Credentials');
         }
     };
 
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
-        console.log('Name:', name);
-        console.log('Username:', username);
-        console.log('Email:', email);
-        console.log('Password:', password);
-        
-        localStorage.setItem('name', name);
-        localStorage.setItem('username', username);
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
+
+        if (name && username && email && password) {
+            console.log('Name:', name);
+            console.log('Username:', username);
+            console.log('Email:', email);
+            console.log('Password:', password);
+
+            localStorage.setItem('name', name);
+            localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
+            setRegistrationSuccess(true);
+            setMissingDetails(false);
+        } else {
+            setMissingDetails(true);
+        }
     };
 
     return (
         <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+            {registrationSuccess && <div className="alert alert-success">User registered successfully!</div>}
+            {missingDetails && <div className="alert alert-danger">Please fill in all the details.</div>}
 
             <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
                 <MDBTabsItem>
@@ -75,6 +85,7 @@ function App() {
                     </MDBTabsLink>
                 </MDBTabsItem>
             </MDBTabs>
+
 
             <MDBTabsContent>
                 <MDBTabsPane show={justifyActive === 'tab1'}>
@@ -186,3 +197,6 @@ function App() {
 }
 
 export default App;
+
+
+
