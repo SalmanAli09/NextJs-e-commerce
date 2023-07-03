@@ -1,6 +1,5 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

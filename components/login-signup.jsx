@@ -1,19 +1,6 @@
 "use client"
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-    MDBContainer,
-    MDBTabs,
-    MDBTabsItem,
-    MDBTabsLink,
-    MDBTabsContent,
-    MDBTabsPane,
-    MDBBtn,
-    MDBIcon,
-    MDBInput,
-    MDBCheckbox
-} from 'mdb-react-ui-kit';
 
 function App() {
     const router = useRouter();
@@ -69,134 +56,123 @@ function App() {
     };
 
     return (
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-            {registrationSuccess && <div className="alert alert-success">User registered successfully!</div>}
-            {missingDetails && <div className="alert alert-danger">Please fill in all the details.</div>}
+        <div className="fluid p-5 flex m-3 justify-center items-center flex-col h-screen" style={{ marginLeft: "10px" }}>
+            {registrationSuccess && (
+                <div className="alert alert-success">User registered successfully!</div>
+            )}
+            {missingDetails && (
+                <div className="alert alert-danger">Please fill in all the details.</div>
+            )}
 
-            <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
-                <MDBTabsItem>
-                    <MDBTabsLink onClick={() => handleJustifyClick('tab1')} active={justifyActive === 'tab1'}>
+            <div className="flex justify-evenly mb-3">
+                <div>
+                    <a
+                        href="#"
+                        className={`block py-2 px-4 border border-gray-300 rounded-t ${justifyActive === 'tab1'
+                            ? 'text-gray-600 hover:bg-gray-100 active:bg-white focus:outline-none focus:border-blue-500'
+                            : ''
+                            }`}
+                        onClick={() => handleJustifyClick('tab1')}
+                    >
                         Login
-                    </MDBTabsLink>
-                </MDBTabsItem>
-                <MDBTabsItem>
-                    <MDBTabsLink onClick={() => handleJustifyClick('tab2')} active={justifyActive === 'tab2'}>
+                    </a>
+                </div>
+                <div >
+                    <a
+                        href="#"
+                        className={`block py-2 px-4 border border-gray-300 rounded-t ${justifyActive === 'tab2'
+                            ? 'text-gray-600 hover:bg-gray-100 active:bg-white focus:outline-none focus:border-blue-500'
+                            : ''
+                            }`}
+                        onClick={() => handleJustifyClick('tab2')}
+                    >
                         Register
-                    </MDBTabsLink>
-                </MDBTabsItem>
-            </MDBTabs>
+                    </a>
+                </div>
+            </div>
 
-
-            <MDBTabsContent>
-                <MDBTabsPane show={justifyActive === 'tab1'}>
-                    <div className="text-center mb-3">
-                        <p>Sign in with:</p>
-                        <div className='d-flex justify-content-between mx-auto' style={{ width: '40%' }}>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='facebook-f' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='twitter' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='google' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='github' size="sm" />
-                            </MDBBtn>
-                        </div>
-                        <p className="text-center mt-3">or:</p>
-                    </div>
+            <div className="max-w-screen-md">
+                <div className={justifyActive === 'tab1' ? '' : 'hidden'}>
                     <form onSubmit={handleLoginSubmit}>
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Email address'
-                            id='form1'
-                            type='email'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="email"
+                            placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Password'
-                            id='form2'
-                            type='password'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="password"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div className="d-flex justify-content-between mx-4 mb-4">
-                            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                            <a href="!#">Forgot password?</a>
+                        <div className="flex justify-between mx-4 mb-4">
+                            <input
+                                className="mr-2 text-blue-500 form-checkbox h-5"
+                                type="checkbox"
+                                name="flexCheck"
+                                id="flexCheckDefault"
+                            />
+                            Accept the terms & condition
                         </div>
-                        <MDBBtn type="submit" className="mb-4 w-100">Sign in</MDBBtn>
-                        <p className="text-center">Not a member? <a href="#!">Register</a></p>
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-full mb-4"
+                        >
+                            Sign in
+                        </button>
+                        <p className="text-center">
+                            Not a member? <a href="#">Register</a>
+                        </p>
                     </form>
-                </MDBTabsPane>
+                </div>
 
-                <MDBTabsPane show={justifyActive === 'tab2'}>
-                    <div className="text-center mb-3">
-                        <p>Sign up with:</p>
-                        <div className='d-flex justify-content-between mx-auto' style={{ width: '40%' }}>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='facebook-f' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='twitter' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='google' size="sm" />
-                            </MDBBtn>
-                            <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                                <MDBIcon fab icon='github' size="sm" />
-                            </MDBBtn>
-                        </div>
-                        <p className="text-center mt-3">or:</p>
-                    </div>
+                <div className={justifyActive === 'tab2' ? '' : 'hidden'}>
                     <form onSubmit={handleRegisterSubmit}>
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Name'
-                            id='form1'
-                            type='text'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="text"
+                            placeholder="Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Username'
-                            id='form1'
-                            type='text'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="text"
+                            placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Email'
-                            id='form1'
-                            type='email'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="email"
+                            placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <MDBInput
-                            wrapperClass='mb-4'
-                            label='Password'
-                            id='form1'
-                            type='password'
+                        <input
+                            className="block w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                            type="password"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div className='d-flex justify-content-center mb-4'>
-                            <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
-                        </div>
-                        <MDBBtn type="submit" className="mb-4 w-100">Sign up</MDBBtn>
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-full mb-4"
+                        >
+                            Sign up
+                        </button>
+                        <p className="text-center">
+                            Already a member? <a href="#">Login</a>
+                        </p>
                     </form>
-                </MDBTabsPane>
-            </MDBTabsContent>
-        </MDBContainer>
+                </div>
+            </div>
+        </div>
     );
 }
 
 export default App;
-
-
-

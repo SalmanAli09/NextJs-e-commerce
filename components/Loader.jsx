@@ -1,12 +1,9 @@
-"use client"
-import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import React from 'react';
 
 export default function Loader() {
-    return (
-        <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center" , height:"100vh" }}>
-            <CircularProgress />
-        </Box>
-    );
+return (
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+<div className="loader"></div>
+</div>
+);
 }
